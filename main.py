@@ -48,11 +48,28 @@ def listOfLists(l):
     for i in l:
         d.setdefault(len(i),[]).append(i)
     return d
+def build(l):
+    new_l =[]
+    for i in range(len(l)):
+        w_l = []
+        for c in l[i]:
+            if c == "0":
+                w_l.append(" ")
+            elif (c=="#"):
+                w_l.append("#")
+        new_l.append(w_l)
+    return new_l
 
 def main():
-    filename = "MaterialsPractica1/diccionari_CB_v2.txt"
-    dic = listOfLists(getDicWords(filename))
+    file_dic = "MaterialsPractica1/diccionari_CB_v2.txt"
+    file_cross = "MaterialsPractica1/crossword_CB_v2.txt"
+    #Diccionario de palabras por length
+    dic = listOfLists(getDicWords(file_dic))
+
+    #Tablero
+    cross = build(getDicWords(file_cross))
     
+
 
 if __name__ == '__main__':
     main()
