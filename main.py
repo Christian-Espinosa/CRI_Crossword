@@ -37,3 +37,22 @@ def BuscaParaulesVer(M):
         zcount=0
         e=e+1
     return words
+
+
+def getDicWords(loc):
+    f = open(loc)
+    l = [l.strip() for l in f]
+    return l
+def listOfLists(l):
+    d = {}
+    for i in l:
+        d.setdefault(len(i),[]).append(i)
+    return d
+
+def main():
+    filename = "MaterialsPractica1/diccionari_CB_v2.txt"
+    dic = listOfLists(getDicWords(filename))
+    
+
+if __name__ == '__main__':
+    main()
