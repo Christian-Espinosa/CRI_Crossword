@@ -52,29 +52,6 @@ def listOfLists(l):
     for i in l:
         d.setdefault(len(i),[]).append(i)
     return d
-def build1(l):
-    new_l =[]
-    es = False
-    palabra_max = 0;
-    for i in range(len(l)):
-        w_l = []
-        p = 0
-        for c in l[i]:
-            if c == "0":
-                es = True
-                w_l.append(" ")
-                p = p+1
-                if palabra_max < p:
-                    palabra_max = p
-            elif (c=="#"):
-                w_l.append("#")
-                if es:
-                    es = False
-                    if palabra_max < p:
-                        palabra_max = p
-                        p = 0
-        new_l.append(w_l)
-    return new_l, palabra_max
 
 def build(l):
     tablero =[]
@@ -95,10 +72,10 @@ def build(l):
                     palabra_max = p
             if col==(len(l[i])-(col-1)):
                 if p > 1:
-                    l_palabras.append(Palabra(fila, col, p, True))
+                    l_palabras.append(Palabra(fila-p, col, p, True))
             if (c=="#"):
                 if p > 1:
-                    l_palabras.append(Palabra(fila, col, p, True))
+                    l_palabras.append(Palabra(fila-p, col, p, True))
                 col = col + 1
                 w_l.append("#")
 
@@ -108,6 +85,23 @@ def build(l):
 
         fila = fila + 1
         tablero.append(w_l)
+
+    #Buscar palabras por columnas
+    p = 0
+    for col in range(len(tablero[0])):
+        for fila in range(len(tablero)):
+            c = tablero[fila][col]
+            if (c == "#" or fila == len(tablero)-1):
+                if c == " ":
+                    p = p + 1
+                if p > 1:
+                    l_palabras.append(Palabra(fila, col-p, p, False))
+                if palabra_max < p:
+                    palabra_max = p
+                p = 0
+            elif(c==" "):
+                p = p + 1
+
     return tablero, palabra_max, l_palabras
 
 def main():
@@ -119,11 +113,11 @@ def main():
     #t = tablero donde vamos a poner las palabras
     #max_p = length palabra maxima
     #l_palabras = lista de posibles palabras que pueden haber en el tablero
-    
+
     t, max_p, l_palabras = build(getDicWords(file_cross))
     print(t)
     print(max_p)
-    print(l_palabras)
+    print(len(l_palabras))
 
     #Tablero
     Tablero(t, max_p)
