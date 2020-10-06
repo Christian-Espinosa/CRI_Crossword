@@ -1,19 +1,15 @@
 
 class Palabra:
     #Principio de palabra
-    coordenadas = []
+    fila = 0
+    col = 0
     longitud = 0
     #Horizontal=True/Vertical=False
     orientacion = True
-    p = []
-    #dar la vuelta a p
-    flip = False
 
-    def __init__(self, coord, l,o,p):
-        self.coordenadas=coord
+    def __init__(self, x, y, l, o):
+        self.fila = x
+        self.col = y
         self.longitud=l
         self.orientacion=o
-        self.paraula=p
 
-    def Flip(self):
-        self.flip = True

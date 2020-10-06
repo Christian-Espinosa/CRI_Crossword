@@ -1,3 +1,7 @@
+from Tablero import *
+from Palabra import *
+
+
 def BuscaParaulesHor(M):
     words = []
     #L = 8
@@ -48,17 +52,63 @@ def listOfLists(l):
     for i in l:
         d.setdefault(len(i),[]).append(i)
     return d
-def build(l):
+def build1(l):
     new_l =[]
+    es = False
+    palabra_max = 0;
     for i in range(len(l)):
         w_l = []
+        p = 0
         for c in l[i]:
             if c == "0":
+                es = True
                 w_l.append(" ")
+                p = p+1
+                if palabra_max < p:
+                    palabra_max = p
             elif (c=="#"):
                 w_l.append("#")
+                if es:
+                    es = False
+                    if palabra_max < p:
+                        palabra_max = p
+                        p = 0
         new_l.append(w_l)
-    return new_l
+    return new_l, palabra_max
+
+def build(l):
+    tablero =[]
+    l_palabras = []
+    palabra_max = 0;
+
+    fila = 0
+    for i in range(len(l)):
+        w_l = []
+        p = 0
+        col = 0
+        for c in l[i]:
+            if c == "0":
+                col = col + 1
+                w_l.append(" ")
+                p = p+1
+                if palabra_max < p:
+                    palabra_max = p
+            if col==(len(l[i])-(col-1)):
+                if p > 1:
+                    l_palabras.append(Palabra(fila, col, p, True))
+            if (c=="#"):
+                if p > 1:
+                    l_palabras.append(Palabra(fila, col, p, True))
+                col = col + 1
+                w_l.append("#")
+
+                if palabra_max < p:
+                    palabra_max = p
+                p = 0
+
+        fila = fila + 1
+        tablero.append(w_l)
+    return tablero, palabra_max, l_palabras
 
 def main():
     file_dic = "MaterialsPractica1/diccionari_CB_v2.txt"
@@ -66,9 +116,20 @@ def main():
     #Diccionario de palabras por length
     dic = listOfLists(getDicWords(file_dic))
 
-    #Tablero
-    cross = build(getDicWords(file_cross))
+    #t = tablero donde vamos a poner las palabras
+    #max_p = length palabra maxima
+    #l_palabras = lista de posibles palabras que pueden haber en el tablero
     
+    t, max_p, l_palabras = build(getDicWords(file_cross))
+    print(t)
+    print(max_p)
+    print(l_palabras)
+
+    #Tablero
+    Tablero(t, max_p)
+
+    #search palabra grande y probar
+
 
 
 if __name__ == '__main__':
