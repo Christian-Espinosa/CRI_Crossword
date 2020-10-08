@@ -1,6 +1,6 @@
 from Tablero import *
 from Palabra import *
-
+import numpy as np
 
 def BuscaParaulesHor(M):
     words = []
@@ -103,6 +103,71 @@ def build(l):
                 p = p + 1
 
     return tablero, palabra_max, l_palabras
+
+
+""" funció que retornarà una llista de dominis assignats a cada variable. Assignarà un domini propi d'entre totes les 
+    paraules del nostre alfabet (possible_words) a cada variable.
+"""
+
+
+def assign_domains(variables, possible_words):
+    return False
+
+"""
+LVA:llista de variables assignades, inicialment està buida
+LVNA:llista de variables no assignades, inicialment conté totes les variables
+R: conjunt de restriccions que s'han de complir per poder assignar un valor a una variable
+D:llista dels dominis de cadascuna de les variables, aquests s'aniran reduïnt amb el forward checking
+var_plus_value: tupla variable-valor que conté la variable var a la que se li assignarà el valor value
+"""
+
+""" funcio que actualitza el domini de les variables no assignades, segons l'assignació que acabem de fer"""
+
+def update_domain(var_plus_value,LVNA,R):
+    return False
+
+
+"""funcio que comprova si un determinat valor value assignat a la variable var compleix les restriccions amb la 
+resta de les variables assignades"""
+
+def meets_restrictions(var_plus_value,LVA,R):
+    return False
+
+
+"""funció que donada una solució comprova si es completa, és a dir si han sigut assignades totes les variables"""
+
+
+def is_complete(solution):
+    return False
+
+"""funció que resoldrà el problema aplicant l'algorisme de Backtracking amb l'heurística de forward-checking aplicada
+    que ens permetrà evitar fallades mitjançant l'eliminació de valors del domini de les variables quan s'assigna un
+    valor a una d'elles"""
+
+def BackForwardChecking(LVA,LVNA,R,D):
+    #Si LVNA buida llavors retornar LVA
+    if len(LVNA) == 0:
+        return LVA
+    # guardem en una variable la primera de les variables de la llista LVNA
+    var = LVNA[0]
+
+    # per cada valor en el domini de var
+    for value in D[var]:
+        #si el valor que volem assignar a la variable satisfà les restriccions
+        if meets_restrictions([var,value],LVA,R):
+            """si el domini s'ha actualitzat correctament ( no hi han hagut variables que es quedin sense valors al seu 
+                domini) update_domain() retorna true, si eliminant aquest value del domini alguna variable s'ha quedat
+                sense possibles valors retorna false"""
+            if update_domain([var,value],LVNA,R,D):
+                """ cridem recursivament a la funció BackForwardChecking amb les llistes LVA i LVNA actualitzades
+                segons la nova assignació. Passem LVA amb un nou element i passem LVNA sense la variable que acabem
+                d'assignar"""
+            solution = BackForwardChecking(np.append(LVA,[var,value]),LVNA[1:],R,D)
+            # si solution es una solució completa retornem solution
+            if is_complete(solution):
+                return solution
+    # fallada
+    return False
 
 def main():
     file_dic = "MaterialsPractica1/diccionari_CB_v2.txt"
