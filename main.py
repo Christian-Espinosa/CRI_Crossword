@@ -3,47 +3,6 @@ from Palabra import *
 import numpy as np
 import copy as cp
 
-def BuscaParaulesHor(M):
-    words = []
-    #L = 8
-    #while L > 1:
-    for i in range(6):
-        zcount = 0
-        for e in range(6):
-            m = M[i][e]
-            if m =='#':
-                if zcount > 1:
-                    words.append(zcount)
-                zcount = 0
-            elif m==0:
-                zcount=zcount+1
-            e=e+1
-        if zcount > 1:
-            words.append(zcount)
-        zcount=0
-        i=i+1
-    return words
-
-def BuscaParaulesVer(M):
-    words = []
-    for e in range(6):
-        zcount = 0
-        for i in range(6):
-            m = M[i][e]
-            if m =='#':
-                if zcount > 1:
-                    words.append(zcount)
-                zcount = 0
-            elif m==0:
-                zcount=zcount+1
-            i=i+1
-        if zcount > 1:
-            words.append(zcount)
-        zcount=0
-        e=e+1
-    return words
-
-
 def getDicWords(loc):
     f = open(loc)
     l = [l.strip() for l in f]
@@ -334,12 +293,11 @@ def main():
 
     t, max_p, l_palabras = build(getDicWords(file_cross))
     print(t)
-    print(max_p)
-    print(len(l_palabras))
+    print("Tamany maxim de paraula: " + max_p)
+    print("N posibilidades: " + len(l_palabras))
     Dom = assign_domains(l_palabras, dic)
     assign_intersections(l_palabras)
-    #Tablero
-    Tablero(t, max_p)
+
     resultat = BackForwardChecking([], l_palabras, Dom, len(l_palabras))
     print(resultat)
     #search palabra grande y probar
