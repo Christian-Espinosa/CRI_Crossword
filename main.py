@@ -3,47 +3,6 @@ from Palabra import *
 import numpy as np
 import copy as cp
 
-def BuscaParaulesHor(M):
-    words = []
-    #L = 8
-    #while L > 1:
-    for i in range(6):
-        zcount = 0
-        for e in range(6):
-            m = M[i][e]
-            if m =='#':
-                if zcount > 1:
-                    words.append(zcount)
-                zcount = 0
-            elif m==0:
-                zcount=zcount+1
-            e=e+1
-        if zcount > 1:
-            words.append(zcount)
-        zcount=0
-        i=i+1
-    return words
-
-def BuscaParaulesVer(M):
-    words = []
-    for e in range(6):
-        zcount = 0
-        for i in range(6):
-            m = M[i][e]
-            if m =='#':
-                if zcount > 1:
-                    words.append(zcount)
-                zcount = 0
-            elif m==0:
-                zcount=zcount+1
-            i=i+1
-        if zcount > 1:
-            words.append(zcount)
-        zcount=0
-        e=e+1
-    return words
-
-
 def getDicWords(loc):
     f = open(loc)
     l = [l.strip() for l in f]
@@ -137,7 +96,7 @@ def taken_row(possible_word, words):
                 if word.col+word.longitud >= possible_word.col:
                     taken_rows += 1
     # si les files ocupades son iguals a la longitud de la possible paraula, llavors no hi pot haver paraula allà i retornem
-    # False
+    # True
     if taken_rows == possible_word.longitud:
         return True
     # si no retornem False, amb lo qual podrem afegir la paraula
@@ -158,9 +117,9 @@ def assign_intersections(variables):
         # tornem a recorrer la llista, de manera que per a cada variable farem les comparacions amb totes les altres
         for var_ in variables:
             # comprovem que la variable var_ no estigui a covered_vars per evitar operacions innecesàries
-            if variables.index(var_) not in covered_vars:
+            if var_.id not in covered_vars:
                 # si var i var_ no son la mateixa variable
-                if variables.index(var) != variables.index(var_):
+                if var.id != var_.id:
                     # comprovem que les orientacions de var i var_ siguin diferents. Si fossin iguals és impossible que
                     # hi hagi una intersecció
                     if var.orientacion != var_.orientacion:
@@ -177,7 +136,7 @@ def assign_intersections(variables):
                                 # columna de var_
                                 var.intersect_list.append([var.fila, var_.col])
                                 partial_list = cp.deepcopy(var.intersect_list)
-        covered_vars.append(variables.index(var))
+        covered_vars.append(var.id)
 
     # necessitem fer això ja que cada cop que fem un append en la llista d'interseccions d'alguna de les variables es fa
     # en totes. Llavors aquí el que farem es seleccionar les interseccions per a cada variable
@@ -230,17 +189,7 @@ var_plus_value: tupla variable-valor que conté la variable var a la que se li a
 
 
 def update_domain(var_plus_value, LVNA, D):
-    """
-    # recorrem la llista de variables no assignades LVNA i comprovem si aquelles variables tenen la mateixa longitud
-    # que la variable a la que li volem assignar el nou valor
-    for var in LVNA:
-        if var.longitud == var_plus_value[0].longitud:
-            # si el diccionari de var no existeix retornem false
-            if var.id not in D.keys():
-                return False
-            else:
-                # si el valor esta en el domini de var l'eliminem
-                if var_plus_value[1] in D[var.id]:"""
+
     D = {dk: [value for value in dv if value is not var_plus_value[1]] for (dk, dv) in D.items()}
     # si var s'ha quedat sense valors en el seu domini retornem False
     for var in LVNA:
@@ -292,6 +241,7 @@ def is_complete(solution, n_words):
     que ens permetrà evitar fallades mitjançant l'eliminació de valors del domini de les variables quan s'assigna un
     valor a una d'elles"""
 
+
 def BackForwardChecking(LVA,LVNA,D,n_words):
     #Si LVNA buida llavors retornar LVA
     if len(LVNA) == 0:
@@ -338,8 +288,7 @@ def main():
     print(len(l_palabras))
     Dom = assign_domains(l_palabras, dic)
     assign_intersections(l_palabras)
-    #Tablero
-    Tablero(t, max_p)
+
     resultat = BackForwardChecking([], l_palabras, Dom, len(l_palabras))
     print(resultat)
     #search palabra grande y probar
