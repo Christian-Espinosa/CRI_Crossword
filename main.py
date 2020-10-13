@@ -284,8 +284,8 @@ def main():
 
     t, max_p, l_palabras = build(getDicWords(file_cross))
     print(t)
-    print(max_p)
-    print(len(l_palabras))
+    print("Tamany maxim de paraula: " + max_p)
+    print("N posibilidades: " + len(l_palabras))
     Dom = assign_domains(l_palabras, dic)
     assign_intersections(l_palabras)
 

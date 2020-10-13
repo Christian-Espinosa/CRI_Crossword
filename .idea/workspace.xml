@@ -19,8 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="136db4cc-a9b6-4b9c-8a48-888f318cb0d0" name="Default Changelist" comment="Build() arreglado.(Añadida taken_row() para controlar posibles palabras que realmente no lo son)&#10;implementación funcional de meet_constrains(), assign_domains(), assign_intersections(), is_complete(), update_domain()&#10;&#10;*** función principal BackForwardChecking no funciona, devuelve lista vacía***">
+    <list default="true" id="136db4cc-a9b6-4b9c-8a48-888f318cb0d0" name="Default Changelist" comment="Creación de la Estructura bàsica de funciones para resolver el problema. Falta implementación.&#10;&#10;**En el còdigo está comentado el funcionamiento de cada una de ellas**&#10;BackForwardChecking(LVA,LVNA,R,D);&#10;is_complete(solution);&#10;meets_restrictions(var_plus_value,LVA,R);&#10;update_domain(var_plus_value,LVNA,R);&#10;assign_domains(variables, possible_words);">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Palabra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Palabra.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,10 +47,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Crossword" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -70,11 +71,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -92,14 +88,7 @@
       <option name="project" value="LOCAL" />
       <updated>1602191069195</updated>
     </task>
-    <task id="LOCAL-00002" summary="Build() arreglado.(Añadida taken_row() para controlar posibles palabras que realmente no lo son)&#10;implementación funcional de meet_constrains(), assign_domains(), assign_intersections(), is_complete(), update_domain()&#10;&#10;*** función principal BackForwardChecking no funciona, devuelve lista vacía***">
-      <created>1602364489294</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1602364489295</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -116,8 +105,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creación de la Estructura bàsica de funciones para resolver el problema. Falta implementación.&#10;&#10;**En el còdigo está comentado el funcionamiento de cada una de ellas**&#10;BackForwardChecking(LVA,LVNA,R,D);&#10;is_complete(solution);&#10;meets_restrictions(var_plus_value,LVA,R);&#10;update_domain(var_plus_value,LVNA,R);&#10;assign_domains(variables, possible_words);" />
-    <MESSAGE value="Build() arreglado.(Añadida taken_row() para controlar posibles palabras que realmente no lo son)&#10;implementación funcional de meet_constrains(), assign_domains(), assign_intersections(), is_complete(), update_domain()&#10;&#10;*** función principal BackForwardChecking no funciona, devuelve lista vacía***" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build() arreglado.(Añadida taken_row() para controlar posibles palabras que realmente no lo son)&#10;implementación funcional de meet_constrains(), assign_domains(), assign_intersections(), is_complete(), update_domain()&#10;&#10;*** función principal BackForwardChecking no funciona, devuelve lista vacía***" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creación de la Estructura bàsica de funciones para resolver el problema. Falta implementación.&#10;&#10;**En el còdigo está comentado el funcionamiento de cada una de ellas**&#10;BackForwardChecking(LVA,LVNA,R,D);&#10;is_complete(solution);&#10;meets_restrictions(var_plus_value,LVA,R);&#10;update_domain(var_plus_value,LVNA,R);&#10;assign_domains(variables, possible_words);" />
   </component>
   <component name="WindowStateProjectService">
     <state x="540" y="206" width="695" height="268" key="#Vim_Emulation" timestamp="1601967811110">
@@ -132,58 +120,54 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602364222273" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1602525596924">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602525596924" />
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1602584534984">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602012388742" />
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602584534984" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1602584534983">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1602012388741" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602584534983" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1602584534983">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1602012388741" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602584534983" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1602584534983">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1602012388741" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602584534983" />
-    <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1602530097750">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602012225609" />
-    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602530097750" />
-    <state width="1515" height="261" key="GridCell.Tab.1.center" timestamp="1602530097749">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1602012225609" />
-    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602530097749" />
-    <state width="1515" height="261" key="GridCell.Tab.1.left" timestamp="1602530097749">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1602012225608" />
-    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602530097749" />
-    <state width="1515" height="261" key="GridCell.Tab.1.right" timestamp="1602530097750">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1602012225609" />
-    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602530097750" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1601969338534">
+    <state width="1259" height="204" key="GridCell.Tab.0.bottom" timestamp="1602413495115">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1601969338534" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602364512641">
+    <state width="1259" height="204" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602413495115" />
+    <state width="1515" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602364132372" />
+    <state width="1259" height="204" key="GridCell.Tab.0.center" timestamp="1602413495114">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1602413495114" />
+    <state width="1515" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602364132371" />
+    <state width="1259" height="204" key="GridCell.Tab.0.left" timestamp="1602413495114">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1602413495114" />
+    <state width="1515" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602364132371" />
+    <state width="1259" height="204" key="GridCell.Tab.0.right" timestamp="1602413495115">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1602413495115" />
+    <state width="1515" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602364132371" />
+    <state width="1259" height="204" key="GridCell.Tab.1.bottom" timestamp="1602413495116">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602413495116" />
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602364132372" />
+    <state width="1259" height="204" key="GridCell.Tab.1.center" timestamp="1602413495116">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1602413495116" />
+    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602364132372" />
+    <state width="1259" height="204" key="GridCell.Tab.1.left" timestamp="1602413495116">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1602413495116" />
+    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602364132372" />
+    <state width="1259" height="204" key="GridCell.Tab.1.right" timestamp="1602413495116">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1602413495116" />
+    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602364132372" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1602412572591">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1602412572591" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602191310764">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602364512641" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602191310764" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1602347450244">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -196,6 +180,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>300</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
