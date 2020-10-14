@@ -127,7 +127,7 @@ def assign_intersections(variables):
                         if var_.orientacion is False:
                             # Primer hem de comprovar si la columna de var es més petita que la columna de var_.
                             # Si la columna de var més la seva longitud menys 1( hem de tenir en compte la columna 0)
-                            # es més gran o igual que la columna on es troba var_sabem que la paraula de var passarà per
+                            # es més gran o igual que la columna on es troba var_ sabem que la paraula de var passarà per
                             # la columna de var_. Hem de fer la comparació simètrica desde var_ pero en aquest cas sobre
                             # les files
                             if var.col <= var_.col and var.col+var.longitud-1 >= var_.col and \
@@ -192,9 +192,22 @@ def update_domain(var_plus_value, LVNA, D):
 
     D = {dk: [value for value in dv if value is not var_plus_value[1]] for (dk, dv) in D.items()}
     # si var s'ha quedat sense valors en el seu domini retornem False
+
+    # recorrerem la llista de variables i les seves interseccions, i només mantindrem al domini aquells valors
+    # que compleixin les restriccions en cada intersecció
     for var in LVNA:
-        if len(D[var.id]) == 0:
-            return False, D
+        if var is not var_plus_value[0]:
+            for intersection in var_plus_value[0].intersect_list:
+                if intersection in var.intersect_list:
+                    if var.orientacion is True:
+                        D[var.id] = [value for value in D[var.id] if var_plus_value[1][intersection[0]
+                                     -var_plus_value[0].fila] == value[intersection[1]-var.col]]
+                    else:
+                        D[var.id] = [value for value in D[var.id] if var_plus_value[1][intersection[1]
+                                     -var_plus_value[0].col] == value[intersection[0]-var.fila]]
+
+            if len(D[var.id]) == 0:
+                return False, D
     return True, D
 
 
@@ -213,10 +226,10 @@ def meets_constraints(var_plus_value, LVA):
                 if var.orientacion is True:
                     # si el valor(paraula) que volem assignar a la variable no conté la mateixa lletra que la paraula de var
                     #  en la posició de la intersecció retornem False. UNA DE LES RESTRICCIONS JA NO ES COMPLEIX
-                    if var_plus_value[1][intersection[0]] != var.valor[intersection[1]]:
+                    if var_plus_value[1][intersection[0]-var_plus_value[0].fila] != var.valor[intersection[1]-var.col]:
                         return False
                 else:
-                    if var_plus_value[1][intersection[1]] != var.valor[intersection[0]]:
+                    if var_plus_value[1][intersection[1]-var_plus_value[0].col] != var.valor[intersection[0]-var.fila]:
                         return False
 
 
@@ -248,7 +261,7 @@ def BackForwardChecking(LVA,LVNA,D,n_words):
         return LVA
     # guardem en una variable la primera de les variables de la llista LVNA
     var = LVNA[0]
-
+    D_old = cp.deepcopy(D)
     # per cada valor en el domini de var
     for value in D[var.id]:
         #si el valor que volem assignar a la variable satisfà les restriccions
@@ -256,7 +269,8 @@ def BackForwardChecking(LVA,LVNA,D,n_words):
             """si el domini s'ha actualitzat correctament ( no hi han hagut variables que es quedin sense valors al seu 
                 domini) update_domain() retorna true, si eliminant aquest value del domini alguna variable s'ha quedat
                 sense possibles valors retorna false"""
-            fine_domains, D = update_domain([var, value], LVNA, D)
+
+            fine_domains, D = update_domain([var, value], LVNA, D_old)
             if fine_domains:
                 """ cridem recursivament a la funció BackForwardChecking amb les llistes LVA i LVNA actualitzades
                 segons la nova assignació. Passem LVA amb un nou element i passem LVNA sense la variable que acabem
@@ -273,8 +287,12 @@ def BackForwardChecking(LVA,LVNA,D,n_words):
 
 
 def main():
+    """
     file_dic = "MaterialsPractica1/diccionari_CB_v2.txt"
     file_cross = "MaterialsPractica1/crossword_CB_v2.txt"
+    """
+    file_dic = "MaterialsPractica1/diccionari_A.txt"
+    file_cross = "MaterialsPractica1/crossword_A_v2.txt"
     #Diccionario de palabras por length
     dic = listOfLists(getDicWords(file_dic))
 
@@ -284,13 +302,14 @@ def main():
 
     t, max_p, l_palabras = build(getDicWords(file_cross))
     print(t)
-    print("Tamany maxim de paraula: " + max_p)
-    print("N posibilidades: " + len(l_palabras))
+    print("Tamany maxim de paraula: " , max_p)
+    print("N posibilidades: ", len(l_palabras))
     Dom = assign_domains(l_palabras, dic)
     assign_intersections(l_palabras)
 
     resultat = BackForwardChecking([], l_palabras, Dom, len(l_palabras))
-    print(resultat)
+    valors_resultat = [[[var.fila, var.col], var.valor, var.longitud, var.orientacion] for var in resultat]
+    print("resultat: ", valors_resultat)
     #search palabra grande y probar
 
 
