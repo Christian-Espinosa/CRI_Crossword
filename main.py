@@ -1,5 +1,6 @@
 from Tablero import *
 from Palabra import *
+from RapidVar import *
 import numpy as np
 import copy as cp
 import time
@@ -14,6 +15,46 @@ def listOfLists(l):
     for i in l:
         d.setdefault(len(i), []).append(i)
     return d
+
+
+def build_possible_rapid_vars(crossword):
+    var_list = np.array([])
+    identifier = 0
+    for row in crossword:
+        w = RapidVar([], True, identifier)
+        word_length = 0
+        for column in row:
+            if column == "0":
+                np.append(w.word, [[np.where(crossword == row), np.where(row == column)], ""])
+                word_length += 1
+                if np.where(row == column) == len(row)-1:
+                    if word_length > 1:
+                        np.append(var_list, w)
+                        identifier += 1
+                        w = RapidVar([], True, identifier)
+            else:
+                if word_length > 1:
+                    np.append(var_list, w)
+                    identifier += 1
+                    w = RapidVar([], True, identifier)
+
+    for column in range(crossword[0]):
+        for row in range(len(crossword)):
+            w = RapidVar([], True, identifier)
+            word_length = 0
+            if crossword[row][column] == "0":
+                np.append(w.word, [[np.where(crossword == row), np.where(row == column)], ""])
+                word_length += 1
+                if np.where(crossword == crossword[row][column]) == len(crossword)-1:
+                    if word_length > 1:
+                        np.append(var_list, w)
+                        identifier += 1
+                        w = RapidVar([], True, identifier)
+            else:
+                if word_length > 1:
+                    np.append(var_list, w)
+                    identifier += 1
+                    w = RapidVar([], True, identifier)
 
 
 def build(l):

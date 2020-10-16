@@ -24,3 +24,6 @@ class Palabra:
     def set_value(self, string):
         self.valor = string
 
+
+
+
