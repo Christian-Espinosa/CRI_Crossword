@@ -2,6 +2,8 @@ from Tablero import *
 from Palabra import *
 import numpy as np
 import copy as cp
+import time
+import timeit
 
 def getDicWords(loc):
     f = open(loc)
@@ -35,12 +37,12 @@ def build(l):
             if col == (len(l[i])-(col-1)):
                 if p > 1:
                     # l_palabras.append(Palabra(fila-p, col, p, True))
-                    l_palabras.append(Palabra(fila, col-p, p, True, id))
+                    l_palabras.append(Palabra(fila, max([col-p, 0]), p, True, id))
                     id += 1
             if (c=="#"):
                 if p > 1:
                     # l_palabras.append(Palabra(fila-p, col, p, True))
-                    l_palabras.append(Palabra(fila, col-p, p, True, id))
+                    l_palabras.append(Palabra(fila, max([col-p, 0]), p, True, id))
                     id += 1
                 col = col + 1
                 w_l.append("#")
@@ -58,14 +60,41 @@ def build(l):
     for col in range(len(tablero[0])):
         for fila in range(len(tablero)):
             c = tablero[fila][col]
+            if c == " ":
+                p = p + 1
+                if fila == len(tablero)-1:
+                    if p > 1:
+                        w = Palabra(fila - p + 1, col, p, False, id)
+                        if not taken_rows(w, l_palabras):
+                            l_palabras.append(w)
+                            id += 1
+                        if palabra_max < p:
+                            palabra_max = p
+                    p = 0
+            else:
+                if p > 1:
+                    w = Palabra(fila - p, col, p, False, id)
+                    if not taken_rows(w, l_palabras):
+                        l_palabras.append(w)
+                        id += 1
+                    if palabra_max < p:
+                        palabra_max = p
+                p = 0
+            """
             if c == "#" or fila == len(tablero)-1:
                 if c == " ":
                     p = p + 1
                 if p > 1:
                     # l_palabras.append(Palabra(fila, col-p, p, False))
                     # comprovem si aquella fila ja té una paraula que passa per aquesta posició
-                    w = Palabra(max([fila-p, 0]), col, p, False, id)
-                    if not taken_row(w, l_palabras):
+                    # w = Palabra(max([fila-p, 0]), col, p, False, id)
+                    # hem de tenir en compte que si la fila es l'última del taulell llavors al restar p anirem una fila
+                    # més enrere des d'on realment hem començat
+                    if fila == len(tablero)-1:
+                        w = Palabra(max([fila - p+1, 0]), col, p, False, id)
+                    else:
+                        w = Palabra(fila - p, col, p, False, id)
+                    if not taken_rows(w, l_palabras):
                         l_palabras.append(w)
                         id += 1
                 if palabra_max < p:
@@ -73,7 +102,7 @@ def build(l):
                 p = 0
             elif(c==" "):
                 p = p + 1
-
+            """
     return tablero, palabra_max, l_palabras
 
 
@@ -81,11 +110,11 @@ def build(l):
    que no ho son"""
 
 
-def taken_row(possible_word, words):
+def taken_rows(possible_word, words):
     # farem un recorregut per les posicions on passa la paraula comprovant si per allà hi passa alguna altra paraula. Si
     # hi ha alguna fila on no hi hagi cap paraula en aquella posició, si que podrem afegir la paraula(False). Si no no podrem
     # (True)
-    taken_rows = 0
+    rows_taken = 0
     for row in range(possible_word.fila, possible_word.fila+possible_word.longitud+1):
         # passem per les diferents paraules ja detectades
         for word in words:
@@ -93,11 +122,13 @@ def taken_row(possible_word, words):
             if word.orientacion is True and word.fila == row:
                 # si aquella paraula passa per la columna on es situa la nostre possible paraula, augmentem les files
                 # ocupades en 1
-                if word.col+word.longitud >= possible_word.col:
-                    taken_rows += 1
+                if word.col <= possible_word.col and word.col+word.longitud >= possible_word.col\
+                        and (possible_word.fila <= word.fila and possible_word.fila + possible_word.longitud-1 >= word.fila):
+                    # var.col <= var_.col and var.col+var.longitud-1 >= var_.col
+                    rows_taken += 1
     # si les files ocupades son iguals a la longitud de la possible paraula, llavors no hi pot haver paraula allà i retornem
     # True
-    if taken_rows == possible_word.longitud:
+    if rows_taken == possible_word.longitud:
         return True
     # si no retornem False, amb lo qual podrem afegir la paraula
     return False
@@ -145,10 +176,13 @@ def assign_intersections(variables):
     for varb in variables:
         # variables en horitzontal
         if varb.orientacion is True:
-            varb.intersect_list = [intersection for intersection in partial_list if intersection[0] == varb.fila]
+            varb.intersect_list = [intersection for intersection in partial_list if intersection[0] == varb.fila and (
+                        varb.col <= intersection[1] <= varb.col + varb.longitud - 1)]
         # variables en vertical
         else:
-            varb.intersect_list = [intersection for intersection in partial_list if intersection[1] == varb.col]
+            varb.intersect_list = [intersection for intersection in partial_list if
+                                   intersection[1] == varb.col and varb.fila <= intersection[
+                                       0] <= varb.fila + varb.longitud - 1]
 
 
 
@@ -197,17 +231,23 @@ def update_domain(var_plus_value, LVNA, D):
     # que compleixin les restriccions en cada intersecció
     for var in LVNA:
         if var is not var_plus_value[0]:
+            if len(D[var.id]) == 0:
+                return False, D
             for intersection in var_plus_value[0].intersect_list:
                 if intersection in var.intersect_list:
                     if var.orientacion is True:
-                        D[var.id] = [value for value in D[var.id] if var_plus_value[1][intersection[0]
-                                     -var_plus_value[0].fila] == value[intersection[1]-var.col]]
+                        D[var.id] = [value for value in D[var.id] if (intersection[0]-var_plus_value[0].fila <=
+                                     len(var_plus_value[1])-1 >= 0) and (intersection[1]-var.col <= len(value)-1 >= 0)
+                                     and var_plus_value[1][intersection[0]-var_plus_value[0].fila] == value[intersection[1]-var.col]]
+                        if len(D[var.id]) == 0:
+                            return False, D
                     else:
-                        D[var.id] = [value for value in D[var.id] if var_plus_value[1][intersection[1]
-                                     -var_plus_value[0].col] == value[intersection[0]-var.fila]]
+                        D[var.id] = [value for value in D[var.id] if (intersection[1]-var_plus_value[0].col <=
+                                     len(var_plus_value[1])-1 >= 0) and (intersection[0]-var.fila <= len(value)-1 >= 0) and
+                                     var_plus_value[1][intersection[1]-var_plus_value[0].col] == value[intersection[0]-var.fila]]
+                        if len(D[var.id]) == 0:
+                            return False, D
 
-            if len(D[var.id]) == 0:
-                return False, D
     return True, D
 
 
@@ -216,7 +256,12 @@ resta de les variables assignades"""
 
 
 def meets_constraints(var_plus_value, LVA):
-    #recorrem la llista de les variables assignades
+
+    # comprovem que el valor que volem assignar no estigui ja assignat a una
+    # altra variable
+    if len([var.valor for var in LVA if var.valor == var_plus_value[1]]) > 0:
+        return False
+    # recorrem la llista de les variables assignades
     for var in LVA:
         # recorrem la llista d'interseccions de var
         for intersection in var.intersect_list:
@@ -287,10 +332,11 @@ def BackForwardChecking(LVA,LVNA,D,n_words):
 
 
 def main():
-    """
-    file_dic = "MaterialsPractica1/diccionari_CB_v2.txt"
-    file_cross = "MaterialsPractica1/crossword_CB_v2.txt"
-    """
+
+    # file_dic = "MaterialsPractica1/diccionari_CB_v2.txt"
+    # file_cross = "MaterialsPractica1/crossword_CB_v2.txt"
+
+
     file_dic = "MaterialsPractica1/diccionari_A.txt"
     file_cross = "MaterialsPractica1/crossword_A_v2.txt"
     #Diccionario de palabras por length
@@ -300,6 +346,7 @@ def main():
     #max_p = length palabra maxima
     #l_palabras = lista de posibles palabras que pueden haber en el tablero
 
+    start_time = time.time()
     t, max_p, l_palabras = build(getDicWords(file_cross))
     print(t)
     print("Tamany maxim de paraula: " , max_p)
@@ -308,8 +355,10 @@ def main():
     assign_intersections(l_palabras)
 
     resultat = BackForwardChecking([], l_palabras, Dom, len(l_palabras))
+    end_time = time.time()
     valors_resultat = [[[var.fila, var.col], var.valor, var.longitud, var.orientacion] for var in resultat]
     print("resultat: ", valors_resultat)
+    print("time: ", end_time-start_time)
     #search palabra grande y probar
 
 

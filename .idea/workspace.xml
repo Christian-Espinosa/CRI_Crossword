@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="136db4cc-a9b6-4b9c-8a48-888f318cb0d0" name="Default Changelist" comment="Actualización assign_intersections, uso de var.id en vez de list.index(var)">
-      <change beforePath="$PROJECT_DIR$/.idea/Crossword.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Crossword.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="136db4cc-a9b6-4b9c-8a48-888f318cb0d0" name="Default Changelist" comment="Apartados C y B completados. Falta arreglar algun error para que funcione el apartado A">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -89,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602191069195</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Apartados C y B completados. Falta arreglar algun error para que funcione el apartado A">
+      <created>1602703655574</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602703655574</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -106,7 +111,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creación de la Estructura bàsica de funciones para resolver el problema. Falta implementación.&#10;&#10;**En el còdigo está comentado el funcionamiento de cada una de ellas**&#10;BackForwardChecking(LVA,LVNA,R,D);&#10;is_complete(solution);&#10;meets_restrictions(var_plus_value,LVA,R);&#10;update_domain(var_plus_value,LVNA,R);&#10;assign_domains(variables, possible_words);" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creación de la Estructura bàsica de funciones para resolver el problema. Falta implementación.&#10;&#10;**En el còdigo está comentado el funcionamiento de cada una de ellas**&#10;BackForwardChecking(LVA,LVNA,R,D);&#10;is_complete(solution);&#10;meets_restrictions(var_plus_value,LVA,R);&#10;update_domain(var_plus_value,LVNA,R);&#10;assign_domains(variables, possible_words);" />
+    <MESSAGE value="Apartados C y B completados. Falta arreglar algun error para que funcione el apartado A" />
+    <option name="LAST_COMMIT_MESSAGE" value="Apartados C y B completados. Falta arreglar algun error para que funcione el apartado A" />
   </component>
   <component name="WindowStateProjectService">
     <state x="540" y="206" width="695" height="268" key="#Vim_Emulation" timestamp="1601967811110">
@@ -121,54 +127,54 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602364222273" />
-    <state width="1515" height="261" key="GridCell.Tab.0.bottom" timestamp="1602703577775">
+    <state width="1515" height="209" key="GridCell.Tab.0.bottom" timestamp="1602863037164">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="204" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602413495115" />
-    <state width="1515" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602703577775" />
-    <state width="1515" height="261" key="GridCell.Tab.0.center" timestamp="1602703577775">
+    <state width="1515" height="209" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602863037164" />
+    <state width="1515" height="209" key="GridCell.Tab.0.center" timestamp="1602863037164">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="204" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1602413495114" />
-    <state width="1515" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602703577775" />
-    <state width="1515" height="261" key="GridCell.Tab.0.left" timestamp="1602703577775">
+    <state width="1515" height="209" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602863037164" />
+    <state width="1515" height="209" key="GridCell.Tab.0.left" timestamp="1602863037164">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="204" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1602413495114" />
-    <state width="1515" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602703577775" />
-    <state width="1515" height="261" key="GridCell.Tab.0.right" timestamp="1602703577775">
+    <state width="1515" height="209" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602863037164" />
+    <state width="1515" height="209" key="GridCell.Tab.0.right" timestamp="1602863037164">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="204" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1602413495115" />
-    <state width="1515" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602703577775" />
-    <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1602703577775">
+    <state width="1515" height="209" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602863037164" />
+    <state width="745" height="261" key="GridCell.Tab.1.bottom" timestamp="1602860763089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1602413495116" />
-    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602703577775" />
-    <state width="1515" height="261" key="GridCell.Tab.1.center" timestamp="1602703577775">
+    <state width="745" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602860763089" />
+    <state width="745" height="261" key="GridCell.Tab.1.center" timestamp="1602860763089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1602413495116" />
-    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602703577775" />
-    <state width="1515" height="261" key="GridCell.Tab.1.left" timestamp="1602703577775">
+    <state width="745" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602860763089" />
+    <state width="745" height="261" key="GridCell.Tab.1.left" timestamp="1602860763089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1602413495116" />
-    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602703577775" />
-    <state width="1515" height="261" key="GridCell.Tab.1.right" timestamp="1602703577775">
+    <state width="745" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602860763089" />
+    <state width="745" height="261" key="GridCell.Tab.1.right" timestamp="1602860763089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1602413495116" />
-    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602703577775" />
+    <state width="745" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602860763089" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1602412572591">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1602412572591" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602585071679">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1602703671676">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602585071679" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602703671676" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1602347450244">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
