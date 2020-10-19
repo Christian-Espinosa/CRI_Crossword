@@ -80,29 +80,7 @@ def build(l):
                     if palabra_max < p:
                         palabra_max = p
                 p = 0
-            """
-            if c == "#" or fila == len(tablero)-1:
-                if c == " ":
-                    p = p + 1
-                if p > 1:
-                    # l_palabras.append(Palabra(fila, col-p, p, False))
-                    # comprovem si aquella fila ja té una paraula que passa per aquesta posició
-                    # w = Palabra(max([fila-p, 0]), col, p, False, id)
-                    # hem de tenir en compte que si la fila es l'última del taulell llavors al restar p anirem una fila
-                    # més enrere des d'on realment hem començat
-                    if fila == len(tablero)-1:
-                        w = Palabra(max([fila - p+1, 0]), col, p, False, id)
-                    else:
-                        w = Palabra(fila - p, col, p, False, id)
-                    if not taken_rows(w, l_palabras):
-                        l_palabras.append(w)
-                        id += 1
-                if palabra_max < p:
-                    palabra_max = p
-                p = 0
-            elif(c==" "):
-                p = p + 1
-            """
+            
     return tablero, palabra_max, l_palabras
 
 
